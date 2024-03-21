@@ -1,12 +1,14 @@
-import Nav from "../Components/Nav";
+import Hero from "../Components/Hero";
+import WaveBG from "../assets/wave.svg"
 
 const Home = () => {
     return (
-        <>
-            <header className="h-24 container mx-auto">
-                <Nav></Nav>
-            </header>
-        </>
+        <div  className="min-h-[calc(100vh-116px)] flex flex-col justify-center items-center relative">
+            <Hero></Hero>
+            <div className="absolute bottom-0 w-full">
+                <img src={WaveBG} className="w-full"/>
+            </div>
+        </div>
     );
 };
 
