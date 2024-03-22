@@ -1,8 +1,10 @@
 import { useLoaderData } from "react-router-dom";
+import Markdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
 
 const Content = () => {
     const blog = useLoaderData();
-    const { title, description, published_at, cover_image, tags } = blog;
+    const { title, body_html, cover_image, tags } = blog;
 
     return (
         <div rel="noopener noreferrer" className="max-w-full mx-auto border-2 p-2 border-opacity-30 border-primary  rounded-md group transition duration-300 hover:no-underline focus:no-underline dark:bg-gray-900">
@@ -14,8 +16,7 @@ const Content = () => {
             </div>
             <div className="p-6 space-y-2">
                 <h3 className="text-2xl font-semibold">{title}</h3>
-                <span className="text-xs dark:text-gray-400">{new Date(published_at).toLocaleDateString()}</span>
-                <p>{description}</p>
+                <Markdown rehypePlugins={[rehypeRaw]}>{body_html}</Markdown>
             </div>
         </div>
     );

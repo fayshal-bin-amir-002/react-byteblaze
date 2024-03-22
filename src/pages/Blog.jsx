@@ -1,10 +1,17 @@
 import { useState } from "react";
 import { Link, Outlet, useLoaderData } from "react-router-dom";
+import { CiBookmark } from "react-icons/ci";
+import { saveBlogs } from "../utilities";
+
 
 const Blog = () => {
     const blog = useLoaderData();
 
     const [tab, setTab] = useState(0);
+
+    const handleBookmark = (blog) => {
+        saveBlogs(blog);
+    }
 
     return (
         <div className="max-w-2xl px-6 py-16 mx-auto space-y-12">
@@ -20,19 +27,23 @@ const Blog = () => {
                 </div>
                 {/* tab options */}
                 <div className="flex items-center -mx-4 overflow-x-auto overflow-y-hidden sm:justify-start flex-nowrap dark:dark:bg-gray-800 dark:dark:text-gray-100">
-                    <Link onClick={()=>setTab(0)} rel="noopener noreferrer" to="" className={`flex items-center flex-shrink-0 px-5 py-3 space-x-2 ${tab===0?'border border-b-0':'border-b'} rounded-t-lg dark:dark:border-gray-400 dark:dark:text-gray-50`}>
+                    <Link onClick={() => setTab(0)} rel="noopener noreferrer" to="" className={`flex items-center flex-shrink-0 px-5 py-3 space-x-2 ${tab === 0 ? 'border border-b-0' : 'border-b'} rounded-t-lg dark:dark:border-gray-400 dark:dark:text-gray-50`}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
                             <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
                         </svg>
                         <span>Content</span>
                     </Link>
-                    <Link onClick={()=>setTab(1)} rel="noopener noreferrer" to={`author`} className={`flex items-center flex-shrink-0 px-5 py-3 space-x-2 ${tab===1?'border border-b-0':'border-b'} rounded-t-lg dark:dark:border-gray-400 dark:dark:text-gray-50`}>
+                    <Link onClick={() => setTab(1)} rel="noopener noreferrer" to={`author`} className={`flex items-center flex-shrink-0 px-5 py-3 space-x-2 ${tab === 1 ? 'border border-b-0' : 'border-b'} rounded-t-lg dark:dark:border-gray-400 dark:dark:text-gray-50`}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
                             <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
                             <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
                         </svg>
                         <span>Author</span>
                     </Link>
+                    {/* bookmark button */}
+                    <div onClick={()=>handleBookmark(blog)} className="ms-5 text-xl hover:scale-105 duration-200 bg-primary text-secondary bg-opacity-20 hover:bg-opacity-40 p-3 rounded-full cursor-pointer">
+                        <CiBookmark />
+                    </div>
                 </div>
                 <Outlet></Outlet>
             </article>
