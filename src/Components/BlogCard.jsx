@@ -32,7 +32,8 @@ const BlogCard = ({ card, deleteable }) => {
 };
 
 BlogCard.propTypes = {
-    card: PropTypes.object.isRequired
+    card: PropTypes.object.isRequired,
+    deleteable: PropTypes.bool.isRequired
 };
 
 export default BlogCard;
